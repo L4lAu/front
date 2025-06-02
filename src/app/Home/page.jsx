@@ -15,7 +15,7 @@ const carrosselItems = [
   },
   {
     id: 3,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/img/FUNDO.jpeg'
   }
 ];
 

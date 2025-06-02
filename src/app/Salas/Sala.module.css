@@ -202,11 +202,11 @@
   
   /* Provas section */
   .provasSection {
+    color: black;
     margin-top: 40px;
   }
   
   .provasSection h2 {
-    color: #556b2f;
     border-bottom: 2px solid #556b2f;
     padding-bottom: 10px;
     font-size: 1.8rem;

@@ -123,7 +123,7 @@ export default function Materias() {
   ];
 
   const filteredMaterias = (nivel === 'medio' ? materiasMedio : materiasTecnico)
-    .filter(m => materia === 'todas' || m.nome.toLowerCase().replace(' ', '-') === materia);
+    .filter(m => materia === 'todas' || m.nome.toLowerCase().replace(/\s+/g, '-') === materia);
 
   const displayedMaterias = showAll ? filteredMaterias : filteredMaterias.slice(0, 4);
 
@@ -166,7 +166,6 @@ export default function Materias() {
           >
             <span>Escola Técnica</span> Vanguarda
           </motion.div>
-
         </div>
       </motion.div>
 
@@ -179,7 +178,6 @@ export default function Materias() {
           transition={{ duration: 0.3, delay: 0.1 }}
         >
           <div className={styles.filterGroup}>
-
             <div className={styles.buttons}>
               <motion.button
                 className={`${styles.button} ${nivel === 'medio' ? styles.active : ''}`}
@@ -207,7 +205,6 @@ export default function Materias() {
           </div>
 
           <div className={styles.filterGroup}>
-
             <div className={styles.selectWrapper}>
               <select
                 className={styles.select}
@@ -221,7 +218,7 @@ export default function Materias() {
                 {(nivel === 'medio' ? materiasMedio : materiasTecnico).map(m => (
                   <option
                     key={m.nome}
-                    value={m.nome.toLowerCase().replace(' ', '-')}
+                    value={m.nome.toLowerCase().replace(/\s+/g, '-')}
                   >
                     {m.nome}
                   </option>
@@ -232,16 +229,26 @@ export default function Materias() {
         </motion.div>
 
         {/* Cards das matérias */}
-        <section className={styles.materiasSection}>
+        <section className={styles.materiasContainer}>
           {displayedMaterias.map((materia) => (
-            <article key={materia.nome} className={styles.materiaCard}>
-              <img src={materia.imagem} alt={`Imagem da matéria ${materia.nome}`} className={styles.materiaImage} />
+            <motion.article 
+              key={materia.nome} 
+              className={styles.materiaCard}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img 
+                src={materia.imagem} 
+                alt={`Imagem da matéria ${materia.nome}`} 
+                className={styles.materiaImage} 
+                loading="lazy"
+              />
               <div className={styles.materiaContent}>
                 <h3>{materia.nome}</h3>
                 <p>{materia.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
                 <div className={styles.materiaFooter}>
                   <motion.a
-                    href={`/materias/${materia.nome.toLowerCase().replace(' ', '-')}`}
+                    href={`/materias/${materia.nome.toLowerCase().replace(/\s+/g, '-')}`}
                     className={styles.saibaMais}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
@@ -255,7 +262,7 @@ export default function Materias() {
                   </div>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </section>
 
@@ -280,8 +287,6 @@ export default function Materias() {
             </motion.button>
           </motion.div>
         )}
-
-
       </main>
     </div>
   );
