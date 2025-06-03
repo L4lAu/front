@@ -4,6 +4,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../Turmas/Materia.module.css';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { Router } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Materias() {
   const [nivel, setNivel] = useState('medio');
@@ -122,6 +125,19 @@ export default function Materias() {
     }
   ];
 
+
+  const [disciplina, setDisciplina] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/aluno/disciplinas/:raAluno')
+      .then(res => res.json())
+      .then(data => setProvas(data))
+      .catch(err => console.error('Erro ao buscar provas:', err));
+  }, []);
+
+  const handleClick = (id) => {
+    Router.push(`/${id}`);
+  };
+
   const filteredMaterias = (nivel === 'medio' ? materiasMedio : materiasTecnico)
     .filter(m => materia === 'todas' || m.nome.toLowerCase().replace(/\s+/g, '-') === materia);
 
@@ -231,16 +247,16 @@ export default function Materias() {
         {/* Cards das matérias */}
         <section className={styles.materiasContainer}>
           {displayedMaterias.map((materia) => (
-            <motion.article 
-              key={materia.nome} 
+            <motion.article
+              key={materia.nome}
               className={styles.materiaCard}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
-              <img 
-                src={materia.imagem} 
-                alt={`Imagem da matéria ${materia.nome}`} 
-                className={styles.materiaImage} 
+              <img
+                src={materia.imagem}
+                alt={`Imagem da matéria ${materia.nome}`}
+                className={styles.materiaImage}
                 loading="lazy"
               />
               <div className={styles.materiaContent}>
@@ -248,7 +264,7 @@ export default function Materias() {
                 <p>{materia.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
                 <div className={styles.materiaFooter}>
                   <motion.a
-                    href={`/materias/${materia.nome.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/materias/${materia.nome.toLowerCase().replace(/\s+/g, '-')}` + `?id=${materia.id}`}
                     className={styles.saibaMais}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}

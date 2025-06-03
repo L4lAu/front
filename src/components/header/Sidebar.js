@@ -73,7 +73,7 @@ export default function Header() {
 
           <div className={styles.separador}></div>
 
-          <a href="/" className={styles.link}><ClipboardList size={20} /> {!(mini && !isMobile) && 'PROVAS'}</a>
+          <a href="/Provas" className={styles.link}><ClipboardList size={20} /> {!(mini && !isMobile) && 'PROVAS'}</a>
           <div className={styles.separador}></div>
 
           <a href="/Relatorios" className={styles.link}><FileText size={20} /> {!(mini && !isMobile) && 'RELATORIOS'}</a>
