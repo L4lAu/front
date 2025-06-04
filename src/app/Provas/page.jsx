@@ -15,10 +15,10 @@ export default function ListaProvas() {
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Lista de Provas</h1>
       {provas.map(materia => (
-        <div key={materia.materia} className="mb-4">
-          <h2 className="text-lg font-semibold">{materia.materia}</h2>
+        <div key={disciplina} className="mb-4">
+          <h2 className="text-lg font-semibold">{disciplina}</h2>
           <ul className="ml-4 list-disc">
-            {materia.provas.map(prova => (
+            {disciplina.prova.map(prova => (
               <li key={prova.id}>
                 Prova {prova.id}
               </li>
