@@ -3,7 +3,8 @@ import styles from './Header.module.css';
 import {
   Menu, Home, Users, FileText, BarChart2,
   User, Settings, ClipboardList, ChevronDown, ChevronUp, ChevronLeft
-} from 'lucide-react';
+} 
+from 'lucide-react';
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';

@@ -1,39 +1,45 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../Turmas/Materia.module.css';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { Router } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Materias() {
+  const [disciplinas, setDisciplinas] = useState([]);
   const [nivel, setNivel] = useState('medio');
   const [materia, setMateria] = useState('todas');
   const [showAll, setShowAll] = useState(false);
 
-  // Imagens placeholder - substitua por suas imagens reais depois
-
-
-  const [disciplina, setDisciplinas] = useState([]);
-  const raAluno = 20251005;
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/aluno/disciplinas/${raAluno}`)
+    fetch(`http://localhost:3000/aluno/disciplinas/20251005`)
       .then(res => res.json())
       .then(data => {
-      setDisciplinas(data);
-    })
-      .catch(err => console.error('Erro ao buscar provas:', err));
+        const materiasFormatadas = data.map((disciplina) => ({
+          id: disciplina.idDisciplina,
+          nome: disciplina.nomeDisciplina,
+          tipo: disciplina.tipo,
+          descricao: disciplina.descricao || '',
+          imagem: disciplina.imagem || ''
+        }));
+        setDisciplinas(materiasFormatadas);
+      })
+      .catch(err => console.error('Erro ao buscar disciplinas:', err));
   }, []);
 
-  const handleClick = (id) => {
-    Router.push(`/${id}`);
-  };
-
-  const filteredMaterias = disciplinas
-    .filter(m => materia === 'todas' || m.nome.toLowerCase().replace(/\s+/g, '-') === materia);
+  const filteredMaterias = disciplinas.filter((d) => {
+    const tipoNormalizado = d.tipo.toLowerCase(); // comum ou desenvolvimento
+    const tipoEsperado = nivel === 'medio' ? 'comum' : 'desenvolvimento';
+    const materiaMatch = materia === 'todas' || d.nomeDisciplina.toLowerCase().replace(/\s+/g, '-') === materia;
+  
+    return tipoNormalizado === tipoEsperado && materiaMatch;
+  });
+  
+  
 
   const displayedMaterias = showAll ? filteredMaterias : filteredMaterias.slice(0, 4);
 
@@ -44,7 +50,6 @@ export default function Materias() {
         <meta name="description" content="Conheça nossas matérias e cursos técnicos" />
       </Head>
 
-      {/* Banner Aprimorado */}
       <motion.div
         className={styles.banner}
         initial={{ opacity: 0 }}
@@ -80,7 +85,6 @@ export default function Materias() {
       </motion.div>
 
       <main className={styles.main}>
-        {/* Filtros Aprimorados */}
         <motion.div
           className={styles.filters}
           initial={{ opacity: 0, y: 20 }}
@@ -95,7 +99,7 @@ export default function Materias() {
                   setNivel('medio');
                   setShowAll(false);
                 }}
-                whileHover={{ scale: 1.03, boxShadow: '0 4px 12px rgba(85, 107, 47, 0.3)' }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span className={styles.buttonIcon}>✏️</span> Ensino Médio
@@ -106,7 +110,7 @@ export default function Materias() {
                   setNivel('tecnico');
                   setShowAll(false);
                 }}
-                whileHover={{ scale: 1.03, boxShadow: '0 4px 12px rgba(85, 107, 47, 0.3)' }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span className={styles.buttonIcon}>⚙️</span> Ensino Técnico
@@ -125,44 +129,43 @@ export default function Materias() {
                 }}
               >
                 <option value="todas">Todas as matérias</option>
-                {(nivel === 'medio' ? materiasMedio : materiasTecnico).map(m => (
-                  <option
-                    key={m.nome}
-                    value={m.nome.toLowerCase().replace(/\s+/g, '-')}
-                  >
-                    {m.nome}
-                  </option>
-                ))}
+                {disciplinas
+                  .filter(d => (nivel === 'medio' && d.tipo.toLowerCase() === 'comum') ||
+                    (nivel === 'tecnico' && d.tipo.toLowerCase() === 'técnico'))
+                  .map(m => (
+                    <option
+                      key={m.id}
+                      value={m.nome.toLowerCase().replace(/\s+/g, '-')}
+                    >
+                      {m.nome}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
         </motion.div>
 
-        {/* Cards das matérias */}
         <section className={styles.materiasContainer}>
-          {displayedMaterias.map((materia) => (
-            <motion.article
-              key={materia.nome}
-              className={styles.materiaCard}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.2 }}
-            >
+          {disciplinas.map((m) => (
+            <article key={m.idDisciplina} className={styles.materiaCard}>
               <img
-                src={m.imagem || placeholderImages[m.nome] || 'default.jpg'}
-                alt={`Imagem da matéria ${m.nome}`}
+                src={m.imagem || '/default.jpg'}
+                alt={`Imagem da matéria ${m.nomeDisciplina}`}
               />
               <div className={styles.materiaContent}>
-                <h3>{materia.nome}</h3>
-                <p>{materia.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
+                <h3>{m.nomeDisciplina}</h3>
+                <p>{m.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
                 <div className={styles.materiaFooter}>
-                  <motion.a
-                    href={`/materias/${materia.nome.toLowerCase().replace(/\s+/g, '-')}` + `?id=${materia.id}`}
+                  <a
+                    href={
+                      m.nomeDisciplina
+                        ? `/materias/${m.nomeDisciplina.toLowerCase().replace(/\s+/g, '-')}` + `?id=${m.idDisciplina}`
+                        : '#'
+                    }
                     className={styles.saibaMais}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
                   >
                     Ver Detalhes →
-                  </motion.a>
+                  </a>
                   <div className={styles.materiaDecorations}>
                     <span className={styles.decorationDot}></span>
                     <span className={styles.decorationDot}></span>
@@ -170,11 +173,10 @@ export default function Materias() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </section>
 
-        {/* Botão Ver mais/menos */}
         {filteredMaterias.length > 4 && (
           <motion.div
             className={styles.showMoreWrapper}
