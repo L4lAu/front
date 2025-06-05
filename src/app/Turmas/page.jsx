@@ -35,11 +35,11 @@ export default function Materias() {
     const tipoNormalizado = d.tipo.toLowerCase(); // comum ou desenvolvimento
     const tipoEsperado = nivel === 'medio' ? 'comum' : 'desenvolvimento';
     const materiaMatch = materia === 'todas' || d.nomeDisciplina.toLowerCase().replace(/\s+/g, '-') === materia;
-  
+
     return tipoNormalizado === tipoEsperado && materiaMatch;
   });
-  
-  
+
+
 
   const displayedMaterias = showAll ? filteredMaterias : filteredMaterias.slice(0, 4);
 
@@ -130,12 +130,14 @@ export default function Materias() {
               >
                 <option value="todas">Todas as matérias</option>
                 {disciplinas
-                  .filter(d => (nivel === 'medio' && d.tipo.toLowerCase() === 'comum') ||
-                    (nivel === 'tecnico' && d.tipo.toLowerCase() === 'técnico'))
+                  .filter(d =>
+                    (nivel === 'medio' && d.tipo.toLowerCase() === 'comum') ||
+                    (nivel === 'tecnico' && d.tipo.toLowerCase() === 'técnico')
+                  )
                   .map(m => (
                     <option
                       key={m.id}
-                      value={m.nome.toLowerCase().replace(/\s+/g, '-')}
+                      value={(m.nome)}
                     >
                       {m.nome}
                     </option>
@@ -146,10 +148,11 @@ export default function Materias() {
         </motion.div>
 
         <section className={styles.materiasContainer}>
-          {disciplinas.map((m) => (
-            <article key={m.idDisciplina} className={styles.materiaCard}>
-              <img
-                src={m.imagem || '/default.jpg'}
+          {displayedMaterias.map((m) => (
+            <article key={m.id} className={styles.materiaCard}>
+
+              <img className={styles.materiaImage}
+                src={m.imagem}
                 alt={`Imagem da matéria ${m.nomeDisciplina}`}
               />
               <div className={styles.materiaContent}>
@@ -159,7 +162,7 @@ export default function Materias() {
                   <a
                     href={
                       m.nomeDisciplina
-                        ? `/materias/${m.nomeDisciplina.toLowerCase().replace(/\s+/g, '-')}` + `?id=${m.idDisciplina}`
+                        ? `/provas/${m.nomeDisciplina.toLowerCase().replace(/\s+/g, '-')}` + `?id=${m.idDisciplina}`
                         : '#'
                     }
                     className={styles.saibaMais}
