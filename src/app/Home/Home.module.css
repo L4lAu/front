@@ -416,6 +416,9 @@
   margin-top: 40px;
 }
 
+.cardDescricao{
+  color: #556b2f;
+}
 .bannerAvaliacao {
   position: absolute;
   top: 0;
@@ -496,12 +499,6 @@
   .atalhos {
     flex-direction: column;
     align-items: center;
-  }
-
-  .atalho,
-  .atalhoFull {
-    flex: 1 1 100%;
-    max-width: 100%;
   }
 }
 

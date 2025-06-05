@@ -83,7 +83,7 @@
 
 /* Conteúdo Principal */
 .main {
-  flex: 1;
+  flex: 0.5;
   padding: 0 2rem;
 }
 
@@ -91,19 +91,19 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5rem;
+  gap: 2.0rem;
   justify-content: space-between;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3.0rem;
 }
 
 .filterGroup {
   flex: 1;
-  min-width: 300px;
+  min-width: 240px;
 }
 
 .buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -163,6 +163,7 @@
   gap: 2rem;
   margin-bottom: 3rem;
 }
+
 .materiaCard {
   border: solid 1px #556b2f;
   background: white;
@@ -171,6 +172,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
+
 .materiaImage {
   width: 100%;
   height: 180px;
@@ -263,24 +265,102 @@
 /* Responsividade */
 @media (max-width: 992px) {
   .bannerSubtitle {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .bannerSchool {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
+  }
+
+  .materiasContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* reduzido o min */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 90%;
+  }
+
+  .materiaCard {
+    font-size: 1rem;
+  }
+
+  .materiaImage {
+    width: 100%;
+  }
+
+
+  .materiaContent {
+    padding: 10px;
+  }
+
+
+  .materiaContent h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1rem;
+  }
+
+
+  .materiaContent p {
+    color: #7f8c8d;
+    line-height: 1;
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 768px) {
   .banner {
-    height: 380px;
+    height: 40vh;
   }
 
   .bannerTitle {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
 
   .bannerSubtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+  .materiasContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* mantém mínimo de 160px */
+    gap: 3vh;
+    width: 100%;
+  }
+  .materiaCard {
+    width: 160px;
+    font-size: 1rem;
+  }
+  .saibaMais{
+    font-size: x-small;
+  }
+
+  .materiaImage {
+    width: 100%;
+  }
+
+
+  .materiaContent {
+    padding: 10px;
+  }
+
+
+  .materiaContent h3 {
+    font-size: medium;
+  }
+
+
+  .materiaContent p {
+    color: #7f8c8d;
+    font-size: small;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+}
+
+
+@media (max-width: 400px) {
+  .materiasContainer {
+    grid-template-columns: 2fr; /* 1 card por linha */
   }
 }
