@@ -231,16 +231,16 @@ export default function Materias() {
         {/* Cards das matérias */}
         <section className={styles.materiasContainer}>
           {displayedMaterias.map((materia) => (
-            <motion.article 
-              key={materia.nome} 
+            <motion.article
+              key={materia.nome}
               className={styles.materiaCard}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
             >
-              <img 
-                src={materia.imagem} 
-                alt={`Imagem da matéria ${materia.nome}`} 
-                className={styles.materiaImage} 
+              <img
+                src={materia.imagem}
+                alt={`Imagem da matéria ${materia.nome}`}
+                className={styles.materiaImage}
                 loading="lazy"
               />
               <div className={styles.materiaContent}>

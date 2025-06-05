@@ -180,7 +180,7 @@
 
 
 .materiaContent {
-  padding: 20px;
+  margin: 2vh;
 }
 
 
@@ -194,13 +194,14 @@
 .materiaContent p {
   color: #7f8c8d;
   line-height: 1.5;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
 .materiaFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2vh;
 }
 
 .saibaMais {
@@ -222,8 +223,6 @@
 
 
 .decorationDot {
-  width: 8px;
-  height: 8px;
   border-radius: 50%;
   background-color: #556b2f;
   opacity: 0.3;
