@@ -26,6 +26,7 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+
   return (
     <>
       <button className={styles.botaoMenu} onClick={() => setAberta(!aberta)}>
@@ -73,8 +74,9 @@ export default function Header() {
           )}
 
           <div className={styles.separador}></div>
+          
 
-          <a href="/Provas" className={styles.link}><ClipboardList size={20} /> {!(mini && !isMobile) && 'PROVAS'}</a>
+          <a href="/Provas/responder/" className={styles.link}><ClipboardList size={20} /> {!(mini && !isMobile) && 'PROVAS'}</a>
           <div className={styles.separador}></div>
 
           <a href="/Relatorios" className={styles.link}><FileText size={20} /> {!(mini && !isMobile) && 'RELATORIOS'}</a>
