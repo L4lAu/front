@@ -34,7 +34,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push(/*isProfessor ? "/{home dos professores}" : */ "/Home");
+        router.push(`/Aluno/${ra}`);
       } else {
         setErro(data.erro);
       }

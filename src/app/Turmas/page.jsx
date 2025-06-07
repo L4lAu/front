@@ -153,16 +153,16 @@ export default function Materias() {
 
               <img className={styles.materiaImage}
                 src={m.imagem}
-                alt={`Imagem da matéria ${m.nomeDisciplina}`}
+                alt={`${m.imagem}`}
               />
               <div className={styles.materiaContent}>
-                <h3>{m.nomeDisciplina}</h3>
+                <h3>{m.nome}</h3>
                 <p>{m.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
                 <div className={styles.materiaFooter}>
                   <a
                     href={
-                      m.nomeDisciplina
-                        ? `/provas/${m.nomeDisciplina.toLowerCase().replace(/\s+/g, '-')}` + `?id=${m.idDisciplina}`
+                      m.nome
+                        ? `/Materia/${m.nome.normalize('NFD').replace(/\s+/g, '-').replace(/[\u0300-\u036f]/g, '')}`
                         : '#'
                     }
                     className={styles.saibaMais}

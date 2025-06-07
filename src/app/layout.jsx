@@ -1,4 +1,7 @@
 
+
+import Footer from '../components/footer/footer.js';
+import Sidebar from '../components/header/Sidebar.js';
 import '../styles/global.css'; // Importação de CSS global
 
 export const metadata = {
@@ -11,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="pt">
       <body>
         <div style={{ display: 'flex' }}>
-
+          <Sidebar />
           <main
             style={{
               
@@ -23,7 +26,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         </div>
-
+        <Footer />
       </body>
     </html>
   );
