@@ -48,7 +48,7 @@ export default function Header() {
 
         <div className={styles.logo}>
           <Image 
-            src="/img/LogoVertical.png" 
+            src="/etvMaior.png" 
             alt="Logo" 
             width={mini && !isMobile ? 90 : 300} 
             height={mini && !isMobile ? 75 : 210} 

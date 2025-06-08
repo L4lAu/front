@@ -11,7 +11,7 @@ export default function Portugues() {
         setLoading(true);
 
         // 1. Busca id da disciplina
-        fetch(`http://localhost:3000/aluno/Materia/portugues`)
+        fetch(`http://localhost:3000/aluno/Materia/geografia`)
             .then(res => {
                 if (!res.ok) throw new Error('Disciplina não encontrada');
                 return res.json();
@@ -21,8 +21,7 @@ export default function Portugues() {
 
                 const materia = {
                     id: data[0].idDisciplina,
-                    nome: data[0].nomeDisciplina,
-                    imag: data[0].imagem
+                    nome: data[0].nomeDisciplina
                 };
 
                 if (!materia.id) throw new Error('ID da disciplina não encontrado');
@@ -40,14 +39,11 @@ export default function Portugues() {
                 const provasFormatadas = dataProvas.map(prova => ({
                     id: prova.idProva,
                     nome: prova.nomeProva,
-                    rg: prova.rgProf,
                     questoes: prova.numQuestoes,
                     data: prova.dataAplicacao ? new Date(prova.dataAplicacao).toLocaleDateString() : 'Sem data'
                 }));
                 setProvas(provasFormatadas);
-                return provasFormatadas.rg;
-            }) 
-            .then ( rg => fetch)
+            })
             .catch(err => {
                 console.error('Erro:', err);
                 setError(err.message);
@@ -55,34 +51,32 @@ export default function Portugues() {
             .finally(() => setLoading(false));
     }, []);
 
-
     if (loading) return <div>Carregando...</div>;
     if (error) return <div>Erro: {error}</div>;
     if (!disciplina) return <div>Disciplina não encontrada</div>;
 
     return (
-        <div className="justify-center text-black gap-4">
-            <div className="p-4 flex justify-center">
-                <h1 className=" block justify-center font-bold p-10 text-6xl text-green-900">{disciplina.nome}</h1>
-            </div>
-                <h1 className="text-black text-2xl">Atividades:</h1>
-            <div className="mt-5 p-4 justify-center bg-[url('https://www.bradescoseguros.com.br/wcm/connect/e1a70f0b-7b7b-4106-9d2e-3688aab1fa9a/materia1desk_1400x650.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-e1a70f0b-7b7b-4106-9d2e-3688aab1fa9a-nAZOf31')] bg-cover bg-center justify-center text-black  border-2 border-green-700 ">
+        <div className="justify-center text-black p-4">
+            <h1 className="text-2xl block justify-center font-bold mb-4">{disciplina.nome}</h1>
+            <div className="justify-center text-black bg-[#ffebc6] border border-green-700 p-4">
+                <h2>Atividades</h2>
                 {provas.length > 0 ? (
                     <ul >
 
                         {provas.map((prova) => (
-                            <li key={prova.id} className="mb-4 p-2">
-                                    <a href={
-                                        prova.nome
-                                            ? `/provas/${prova.id}`
-                                            : '#'
-        
-                                    } className="border p-3 bg-white flex justify-between rounded hover:border-2 border-green-700 ">
+                            <a href={
+                                prova.nome
+                                    ? `/provas/${prova.id}`
+                                    : '#'
+
+                            } className=" mb-4 p-2">
+                                <li key={prova.id} className="border  bg-white flex justify-between p-3 rounded hover:border-2 border-green-700 ">
+
                                     <strong className="text-lg">{prova.nome}</strong>
-                                    <span>{prova.questoes} questões</span>
+                                    <span>{prova.questoes} questões</span> -
                                     <span className="text-gray-600 "> {prova.data}</span>
-                            </a>
                                 </li>
+                            </a>
                         ))}
                     </ul>
                 ) : (
