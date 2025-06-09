@@ -12,7 +12,7 @@ export default function Portugues() {
         setLoading(true);
 
         // 1. Busca id da disciplina
-        fetch(`http://localhost:3000/dados/Materia/historia`)
+        fetch(`http://localhost:3000/dados/Materia/Automação%20Residencial%20e%20IoT`)
             .then(res => {
                 if (!res.ok) throw new Error('Disciplina não encontrada');
                 return res.json();
@@ -79,7 +79,7 @@ export default function Portugues() {
 
     return (
         <div>
-            <div className="mx-5 my-8 p-8 md:p-14 border-4 border-[#556b2f] rounded-lg bg-[url('https://static.escolakids.uol.com.br/2024/06/a-historia-e-uma-importante-area-do-conhecimento.jpg')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px] relative overflow-hidden">
+            <div className="mx-5 my-8 p-8 md:p-14 border-4 border-[#556b2f] rounded-lg bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoqWnlz6pUCkoqE40BkRRJMDk5PdaxqsCy6g&s')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px] relative overflow-hidden">
                 <h1 className="mt-25 text-4xl font-bold text-white -underline-offset-8 [text-shadow:_4px_0_0_#000,_-2px_0_0_#000,_0_2px_0_#000,_0_-2px_0_#000]"> {disciplina.nome}</h1>
                 {professor.length > 0 ? (
 

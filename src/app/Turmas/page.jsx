@@ -162,7 +162,7 @@ export default function Materias() {
                   <a
                     href={
                       m.nome
-                        ? `/Materia/${m.nome.normalize('NFD').replace(/\s+/g, '-').replace(/[\u0300-\u036f]/g, '')}`
+                        ? `/Materia/${m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`
                         : '#'
                     }
                     className={styles.saibaMais}
