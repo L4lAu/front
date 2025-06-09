@@ -95,7 +95,7 @@ export default function Portugues() {
             <h1 className="m-5 text-black text-2xl">Atividades:</h1>
             <div className="mx-5 my-5 p-4 bg-[#556b2f] text-black border-2 border-green-700 rounded-lg">
                 {provas.length > 0 ? (
-                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <ul className="grid  md:grid-cols-2 lg:grid-cols-1 p-2 gap-4">
 
                         {provas.map((prova) => (
                             <li key={prova.id}>
@@ -104,9 +104,10 @@ export default function Portugues() {
                                         ? `/provas/${prova.id}`
                                         : '#'
 
-                                } className="block border p-4 bg-white rounded-lg hover:border-2 hover:border-green-700 transition-all duration-200">
+                                } className="block border flex justify-between p-4 mb-4 bg-white rounded-lg hover:border-2 hover:border-green-700 transition-all duration-200">
                                     <strong className="text-lg font-semibold block truncate">{prova.nome}</strong>
-                                    <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">{prova.questoes} questões</span>
+                                    <span className="lg:text-lg sm:text-sm bg-green-100 text-green-800 px-2 py-1 rounded">{prova.questoes} questões</span>
+                                    <span className="lg:text-lg sm:text-sm text-green-800 px-2 py-1 rounded">{prova.questoes * 10}/{prova.questoes * 10}</span>
                                     <span className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded"> {prova.data}</span>
                                 </a>
                             </li>
