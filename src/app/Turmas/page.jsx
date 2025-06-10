@@ -34,12 +34,14 @@ export default function Materias() {
   const filteredMaterias = disciplinas.filter((d) => {
     const tipoNormalizado = d.tipo.toLowerCase(); // comum ou desenvolvimento
     const tipoEsperado = nivel === 'medio' ? 'comum' : 'desenvolvimento';
-    const materiaMatch = materia === 'todas' || d.nomeDisciplina.toLowerCase().replace(/\s+/g, '-') === materia;
+    const materiaMatch = 
+    materia === 'todas' || 
+    (d.nomeDisciplina || '').toLowerCase().replace(/\s+/g, '-') === materia;
 
     return tipoNormalizado === tipoEsperado && materiaMatch;
   });
 
-
+  
 
   const displayedMaterias = showAll ? filteredMaterias : filteredMaterias.slice(0, 4);
 
