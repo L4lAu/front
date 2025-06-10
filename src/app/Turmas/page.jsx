@@ -12,36 +12,33 @@ export default function Materias() {
   const [materia, setMateria] = useState('todas');
   const [showAll, setShowAll] = useState(false);
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
   useEffect(() => {
     fetch(`http://localhost:3000/aluno/disciplinas/20251005`)
       .then(res => res.json())
       .then(data => {
-        const materiasFormatadas = data.map((disciplina) => ({
+        setDisciplinas(data.map(disciplina => ({
           id: disciplina.idDisciplina,
           nome: disciplina.nomeDisciplina,
           tipo: disciplina.tipo,
           descricao: disciplina.descricao || '',
           imagem: disciplina.imagem || ''
-        }));
-        setDisciplinas(materiasFormatadas);
+        })));
       })
       .catch(err => console.error('Erro ao buscar disciplinas:', err));
   }, []);
 
-  const filteredMaterias = disciplinas.filter((d) => {
-    const tipoNormalizado = d.tipo.toLowerCase(); // comum ou desenvolvimento
-    const tipoEsperado = nivel === 'medio' ? 'comum' : 'desenvolvimento';
-    const materiaMatch = 
-    materia === 'todas' || 
-    (d.nomeDisciplina || '').toLowerCase().replace(/\s+/g, '-') === materia;
-
-    return tipoNormalizado === tipoEsperado && materiaMatch;
+  const filteredMaterias = disciplinas.filter(d => {
+    // Filtro por nível
+    const tipoMatch = nivel === 'medio' 
+      ? d.tipo?.toLowerCase() === 'comum' 
+      : d.tipo?.toLowerCase() === 'desenvolvimento';
+    
+    // Filtro por matéria
+    const materiaMatch = materia === 'todas' || 
+      d.nome?.toLowerCase() === materia.toLowerCase();
+    
+    return tipoMatch && materiaMatch;
   });
-
-  
 
   const displayedMaterias = showAll ? filteredMaterias : filteredMaterias.slice(0, 4);
 
@@ -49,140 +46,76 @@ export default function Materias() {
     <div className={styles.container}>
       <Head>
         <title>Matérias - Escola Técnica Vanguarda</title>
-        <meta name="description" content="Conheça nossas matérias e cursos técnicos" />
       </Head>
 
-      <motion.div
-        className={styles.banner}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.2 }}
-      >
+      {/* Banner (garantindo que aparece) */}
+      <motion.div className={styles.banner} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div className={styles.bannerContent}>
-          <motion.h1
-            initial={{ y: -30 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.3 }}
-            className={styles.bannerTitle}
-          >
-            Explore Nossas <span>Turmas</span>
-          </motion.h1>
-          <motion.p
-            initial={{ y: 30 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className={styles.bannerSubtitle}
-          >
-            Educação de qualidade que transforma vidas
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className={styles.bannerSchool}
-          >
+          <h1 className={styles.bannerTitle}>Explore Nossas <span>Turmas</span></h1>
+          <p className={styles.bannerSubtitle}>Educação de qualidade que transforma vidas</p>
+          <div className={styles.bannerSchool}>
             <span>Escola Técnica</span> Vanguarda
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
       <main className={styles.main}>
-        <motion.div
-          className={styles.filters}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-        >
+        {/* Filtros */}
+        <div className={styles.filters}>
           <div className={styles.filterGroup}>
             <div className={styles.buttons}>
-              <motion.button
+              <button 
                 className={`${styles.button} ${nivel === 'medio' ? styles.active : ''}`}
-                onClick={() => {
-                  setNivel('medio');
-                  setShowAll(false);
-                }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                onClick={() => setNivel('medio')}
               >
-                <span className={styles.buttonIcon}>✏️</span> Ensino Médio
-              </motion.button>
-              <motion.button
+                Ensino Médio
+              </button>
+              <button
                 className={`${styles.button} ${nivel === 'tecnico' ? styles.active : ''}`}
-                onClick={() => {
-                  setNivel('tecnico');
-                  setShowAll(false);
-                }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                onClick={() => setNivel('tecnico')}
               >
-                <span className={styles.buttonIcon}>⚙️</span> Ensino Técnico
-              </motion.button>
+                Ensino Técnico
+              </button>
             </div>
           </div>
 
           <div className={styles.filterGroup}>
-            <div className={styles.selectWrapper}>
-              <select
-                className={styles.select}
-                value={materia}
-                onChange={(e) => {
-                  setMateria(e.target.value);
-                  setShowAll(false);
-                }}
-              >
-                <option value="todas">Todas as matérias</option>
-                {disciplinas
-                  .filter(d =>
-                    (nivel === 'medio' && d.tipo.toLowerCase() === 'comum') ||
-                    (nivel === 'tecnico' && d.tipo.toLowerCase() === 'técnico')
-                  )
-                  .map(m => (
-                    <option
-                      key={m.id}
-                      value={(m.nome)}
-                    >
-                      {m.nome}
-                    </option>
-                  ))}
-              </select>
-            </div>
+            <select
+              className={styles.select}
+              value={materia}
+              onChange={(e) => setMateria(e.target.value)}
+            >
+              <option value="todas">Todas as matérias</option>
+              {disciplinas
+                .filter(d => nivel === 'medio' 
+                  ? d.tipo?.toLowerCase() === 'comum' 
+                  : d.tipo?.toLowerCase() === 'desenvolvimento'
+                )
+                .map(m => (
+                  <option key={m.id} value={m.nome}>
+                    {m.nome}
+                  </option>
+                ))}
+            </select>
           </div>
-        </motion.div>
+        </div>
 
-        <section className={styles.materiasContainer}>
-          {displayedMaterias.map((m) => (
-            <article key={m.id} className={styles.materiaCard}>
-
-              <img className={styles.materiaImage}
-                src={m.imagem}
-                alt={`${m.imagem}`}
-              />
+        {/* Matérias */}
+        <div className={styles.materiasContainer}>
+          {displayedMaterias.map(m => (
+            <div key={m.id} className={styles.materiaCard}>
+              <img src={m.imagem} alt={m.nome} className={styles.materiaImage} />
               <div className={styles.materiaContent}>
                 <h3>{m.nome}</h3>
-                <p>{m.descricao || 'Descubra os conteúdos e habilidades desenvolvidas nesta disciplina'}</p>
-                <div className={styles.materiaFooter}>
-                  <a
-                    href={
-                      m.nome
-                        ? `/Materia/${m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`
-                        : '#'
-                    }
-                    className={styles.saibaMais}
-                  >
-                    Ver Detalhes →
-                  </a>
-                  <div className={styles.materiaDecorations}>
-                    <span className={styles.decorationDot}></span>
-                    <span className={styles.decorationDot}></span>
-                    <span className={styles.decorationDot}></span>
-                  </div>
-                </div>
+                <p>{m.descricao || 'Descrição não disponível'}</p>
+                <a href={`/Materia/${m.nome.replace(/\s+/g, '-')}`} className={styles.saibaMais}>
+                  Ver Detalhes →
+                </a>
               </div>
-            </article>
+            </div>
           ))}
-        </section>
-
-        {filteredMaterias.length > 4 && (
+        </div>
+         {filteredMaterias.length > 4 && (
           <motion.div
             className={styles.showMoreWrapper}
             initial={{ opacity: 0 }}

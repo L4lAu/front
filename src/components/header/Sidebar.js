@@ -82,7 +82,7 @@ export default function Header() {
           <a href="/Relatorios" className={styles.link}><FileText size={20} /> {!(mini && !isMobile) && 'RELATORIOS'}</a>
           <div className={styles.separador}></div>
 
-          <a href="#" className={styles.link}><BarChart2 size={20} /> {!(mini && !isMobile) && 'DESEMPENHO'}</a>
+          <a href="/Desempenho" className={styles.link}><BarChart2 size={20} /> {!(mini && !isMobile) && 'DESEMPENHO'}</a>
           <div className={styles.separador}></div>
 
           <a href="#" className={styles.link}><User size={20} /> {!(mini && !isMobile) && 'PERFIL'}</a>
