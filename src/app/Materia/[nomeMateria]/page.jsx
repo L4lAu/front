@@ -10,6 +10,7 @@ export default function MateriaPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { nomeMateria } = useParams(); // Extrai o parâmetro dinâmico
+    const { ra } = "20251005";
 
     useEffect(() => {
         setLoading(true);
@@ -51,7 +52,6 @@ export default function MateriaPage() {
                 }));
                 setProvas(provasFormatadas);
                 const rgProfessor = dataProvas[0].rgProf;
-                console.log("RG do professor encontrado:", rgProfessor); // Debug
 
                 return rgProfessor;
             })
@@ -65,7 +65,6 @@ export default function MateriaPage() {
                     rg: prof.rgProf,
                     nome: prof.nome
                 }));
-                console.log("Professor formatado:", professorFormatado);
                 setProfessor(professorFormatado);
             })
             .catch(err => {
@@ -83,7 +82,7 @@ export default function MateriaPage() {
     return (
         <div className="min-h-screen">
             {/* Cabeçalho com imagem de fundo */}
-            <div className="mx-3 lg:mx-8 xl:mx-15 my-4 md:my-6 lg:my-8 border-4 border-[#556b2f] rounded-lg bg-[url('https://www.bradescoseguros.com.br/wcm/connect/e1a70f0b-7b7b-4106-9d2e-3688aab1fa9a/materia1desk_1400x650.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-e1a70f0b-7b7b-4106-9d2e-3688aab1fa9a-nAZOf31')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center relative overflow-hidden min-h-[100px] md:min-h-[200px] lg:min-h-[250px]">
+            <div className="mx-3 lg:mx-8 xl:mx-15 my-4 md:my-6 lg:my-8 border-4 border-[#556b2f] rounded-lg bg-[url('../../public/fundoBannerMateria.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center relative overflow-hidden min-h-[100px] md:min-h-[200px] lg:min-h-[250px]">
                 <div className="text-center ">
                     <h1 className="mt-3 md:mt-5 lg:mt-8 text-3xl sm:text-4xl md:text-5xl font-bold text-white [text-shadow:_4px_0_0_#000,_-2px_0_0_#000,_0_2px_0_#000,_0_-2px_0_#000]">
                         {disciplina.nome}
@@ -103,12 +102,12 @@ export default function MateriaPage() {
             {/* Seção de descrição e desempenho */}
             <div className="mx-3 lg:mx-8 xl:mx-15 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
                 <div className="w-full h-auto min-h-[160px] md:h-[200px] p-4 border-2 flex items-center justify-center border-green-700 bg-[#f1d196] text-green-800 rounded-lg text-base sm:text-lg md:text-xl lg:text-2xl">
-                    <h1 className="font-bold break-words">{disciplina.descricao}</h1>
+                    <h1 className="font-bold break-words ">aviso:</h1>
+                    <p>${}</p>
                 </div>
                 <a href={
-                      localStorage.data
-                        ? `/desempenho/${localStorage.user}`
-                        : '#'
+                         `/Desempenho/20251005`
+                         
                     }>
                     <div className="w-full h-auto min-h-[160px] md:h-[200px] p-4 flex items-center justify-center border-2 border-green-700 rounded-lg text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl bg-cover bg-center bg-no-repeat bg-[url('https://preview.redd.it/489ohv5xzvf31.jpg?width=640&crop=smart&auto=webp&s=78d2e524f6c461eac7a35b00e6b441886ef06c37')]">
                         <h3 className="w-100 font-bold [text-shadow:_4px_0_0_#000,_-2px_0_0_#000,_0_2px_0_#000,_0_-2px_0_#000] text-center">

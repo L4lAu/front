@@ -7,30 +7,31 @@ import styles from './Home.module.css';
 const carrosselItems = [
   {
     id: 1,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/../bannerMinaCarrossel.png',
+    titulo: "Escola Tecnica Vanguarda"
   },
   {
     id: 2,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/../bannerEstudando.png'
   },
   {
     id: 3,
-    imagem: '@/img/FUNDO.jpeg'
+    imagem: '@/../bannerIntervalo.png'
   }
 ];
 
 const avaliacoesItems = [
     {
     id: 1,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/../1.jfif'
   },
   {
     id: 2,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/../2.jfif'
   },
   {
     id: 3,
-    imagem: '/img/FUNDO.jpeg'
+    imagem: '@/../3.jfif'
   }
 ];
 
