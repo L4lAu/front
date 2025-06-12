@@ -1,49 +1,43 @@
 'use client';
-
-//importação de módulos
 import { useState } from 'react';
-import Link from "next/link";
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function LoginPage() {
-  const { tipo } = useParams()
   const router = useRouter();
-  const isProfessor = tipo === "professor";
+  const [isProfessor, setIsProfessor] = useState(false);
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
 
-  const [login, setLogin] = useState('')
-  const [senha, setSenha] = useState('')
-  const [erro, setErro] = useState('')
-
-  //
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setErro('');
-    
-    try {
-      const endpoint = tipo === 'professor' ? '/api/professor-login/route.js' : '/api/login';
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(
-          tipo === 'professor'
-            ? { rg: login, senha }
-            : { ra: login, senha }
-        )
-      });
-      const data = await res.json();
-
-      if (res.ok) {
-        router.push(`/Aluno/${login}`);
-      } else {
-        setErro(data.erro);
-      }
-    } catch (err) {
-      setErro('Erro ao conectar com o servidor.');
+    // Verificação básica das credenciais
+    if (!isProfessor && login === '20252025' && senha === 'convidado123') {
+      // Login como aluno
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userType', 'aluno');
+      router.push('/aluno');
+    } 
+    else if (isProfessor && login === '00000000000' && senha === 'adm123') {
+      // Login como professor (exemplo)
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userType', 'professor');
+      router.push('/professor');
     }
-  }
+    else {
+      setErro('Credenciais inválidas. Por favor, tente novamente.');
+    }
+  };
 
-
+  const toggleUserType = () => {
+    setIsProfessor(!isProfessor);
+    setLogin('');
+    setSenha('');
+    setErro('');
+  };
 
   return (
     <main
@@ -52,11 +46,10 @@ export default function LoginPage() {
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
-      <section className="relative z-10 w-[92%] max-w-md rounded-md  border-indigo-600/80 bg-[#8f4f3ce6] p-6 text-white shadow-xl md:p-8">
+      <section className="relative z-10 w-[92%] max-w-md rounded-md border border-indigo-600/80 bg-[#8f4f3ce6] p-6 text-white shadow-xl md:p-8">
         <header className="mb-6 text-center">
-          <img src='/etvMaior.png' />
-          <p>Faça seu login como {isProfessor ? 'professor' : 'aluno'} abaixo:</p>
-
+          <img src='/logo.png' alt="Logo da Escola" className="mx-auto mb-4 h-16" />
+          <p className="text-sm">Faça seu login como {isProfessor ? 'professor' : 'aluno'} abaixo:</p>
         </header>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
@@ -110,9 +103,12 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 text-center text-sm">
-          <Link href={isProfessor ? "/login/aluno" : "/login/professor"} className="text-[#f3e7d7] underline hover:font-bold">
-            {isProfessor ? "Sou um Aluno" : "Sou um Professor/Adiministrador"}
-          </Link>
+          <button 
+            onClick={toggleUserType}
+            className="text-[#f3e7d7] underline hover:font-bold"
+          >
+            {isProfessor ? "Sou um Aluno" : "Sou um Professor/Administrador"}
+          </button>
         </div>
       </section>
     </main>

@@ -1,0 +1,545 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  gap: 40px;
+  padding: 40px 20px;
+  transition: width 0.3s ease;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Quando sidebar está mini, o conteúdo aumenta */
+.expandido {
+  width: 95%;
+  /* aumenta a largura do conteúdo */
+}
+.carrossel {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner.ativo {
+  opacity: 1;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.botoes {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.botaoPrimario,
+.botaoSecundario {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.botaoPrimario {
+  background: linear-gradient(341deg, #556b32, #323f1e);
+  color: white;
+}
+
+.botaoPrimario:hover {
+  background: linear-gradient(280deg, #323f1e , #556b32);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px #556b32
+}
+
+.botaoSecundario {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.botaoSecundario:hover {
+  background: white;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Navigation Buttons */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0px);
+  z-index: 10;
+}
+
+.navBtn:hover {
+  background:#556b32;
+}
+
+.navBtnPrev {
+  left: 20px;
+}
+
+.navBtnNext {
+  right: 20px;
+}
+
+/* Indicators */
+.indicadores {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicador {
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicador.ativo {
+  background: white;
+}
+
+.indicador:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+/* Atalhos - container geral com animação e espaçamento */
+.atalhos {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 30px 0;
+  animation: fadeIn 1s ease-in;
+  flex-wrap: wrap;
+  transition: all 0.4s ease;
+}
+
+/* Quando a sidebar estiver em modo mini, atalhos ficam mais largos */
+.expandido .atalhos .atalho {
+  flex: 1 1 calc(33.33% - 40px); /* Mais espaço com sidebar recolhida */
+  min-width: 320px;
+}
+
+.atalhos {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 30px 0;
+  animation: fadeIn 1s ease-in;
+}
+
+.atalho {
+  flex: 1 1 calc(25% - 30px); /* mantém 4 por linha */
+  background-color: #fff6e000;
+  padding: 50px 30px; /* padding maior */
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 6px 0px 0.5px rgb(85 107 47);
+  text-decoration: none;
+  color: #556b2f;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-width: 320px; /* largura mínima maior */
+  max-width: none;
+}
+
+.atalhoFull {
+  flex: 1 1 100%;
+}
+
+.atalho:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 10px 0px 0px rgb(85 107 47);
+  background-color: #f8dfafa1;
+  border: solid 2px #556b2f;
+}
+
+.atalhoIcone {
+  font-size: 3.5rem;
+  transition: transform 0.3s ease;
+}
+
+.atalhoTexto {
+  font-size: 1.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Responsividade */
+@media (max-width: 1600px) {
+  .atalho {
+    flex: 1 1 calc(33.333% - 27px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .atalho {
+    flex: 1 1 calc(50% - 20px);
+    min-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .atalhos {
+    gap: 30px;
+  }
+  .atalho {
+    flex: 1 1 100%;
+    padding: 35px;
+  }
+}
+
+/* Seções abaixo do banner */
+.secoes {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  flex-wrap: wrap;
+  animation: fadeIn 1s ease-in;
+}
+.atividades{
+  box-shadow: 0px 6px 1px 1px rgb(85 107 47);
+}
+.avisos{
+  box-shadow: 0px 6px 1px 1px rgb(85 107 47);
+}
+.atividades,
+.avisos {
+  background-color: #f4deb5;
+  padding: 32px;
+  border-radius: 12px;
+  flex: 1 1 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease;
+}
+
+.atividades h2,
+.avisos h2 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #556b2f;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.atividades h2,
+
+.atividades h2::before {
+  content: "📘";
+  font-size: 1.8rem;
+}
+
+.avisos h2::before {
+  content: "📢";
+  font-size: 1.8rem;
+}
+
+.atividades ul,
+.avisos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.atividades li,
+.avisos li {
+  padding: 12px 0;
+  border-bottom: 1px solid #c287628f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Tempo relativo com animação simples */
+.tempo {
+  font-size: 1rem;
+  color: #888;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeInTempo 1.5s forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInTempo {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Link no rodapé das seções avisos e atividades */
+.linkRodape {
+  margin-top: 10px;
+  text-align: right;
+  font-weight: 600;
+  color: #556b2f;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+
+/* Espaçamento extra para os <a> nas seções */
+
+
+/* Cards de propaganda */
+.cardsPropagandaWrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+}
+
+.fundoImagem {
+  background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: -1;
+  border-radius: 16px;
+}
+
+.cardsPropaganda {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease-in;
+}
+
+.card {
+  background-color: #f4deb5;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0px 6px 0px 0px rgb(85 107 47);
+  flex: 1 1 300px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 10px 0px 0px rgb(85 107 47);
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.cardTexto {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #556b2f;
+}
+/* Estilos para o carrossel de avaliações (imagens) */
+.carrosselAvaliacoes {
+  position: relative;
+  width: 100%;
+  max-height: 60vh;
+  height: 60vh;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+
+.cardDescricao{
+  color: #556b2f;
+}
+.bannerAvaliacao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.bannerAvaliacao.ativo {
+  opacity: 1;
+}
+
+.overlayAvaliacao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+}
+
+.indicadoresAvaliacoes {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicadorAvaliacao {
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicadorAvaliacao.ativo {
+  background: white;
+}
+
+.indicadorAvaliacao:hover {
+  transform: scale(1.2);
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+
+  .atalhos {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .carrossel {
+    height: 50vh;
+  }
+  
+  .overlay {
+    padding: 2rem;
+    max-width: 90%;
+  }
+  
+  .overlay h1 {
+    font-size: 2rem;
+  }
+  
+  .overlay p {
+    font-size: 1rem;
+  }
+  
+  .botoes {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .botaoPrimario,
+  .botaoSecundario {
+    width: 200px;
+  }
+  
+  .navBtn {
+    font-size: 1.5rem;
+    padding: 8px 12px;
+  }
+  
+  .navBtnPrev {
+    left: 10px;
+  }
+  
+  .navBtnNext {
+    right: 10px;
+  }
+}
+

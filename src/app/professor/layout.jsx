@@ -1,13 +1,12 @@
 
 
-import Footer from '../components/footer/footer.js';
-import Sidebar from '../components/header/Sidebar.js';
-import '../styles/global.css'; // Importação de CSS global
-
+import Footer from './components/footer/footer.js';
+import Sidebar from './components/header/Sidebar.js';
+import '../../styles/global.css'; // Importação de CSS global
 
 export const metadata = {
-  title: 'Meu Site',
-  description: 'Descrição do site',
+  title: 'Portal ETV',
+  description: 'Portal de Correção de Provas Online',
 };
 
 export default function RootLayout({ children }) {
@@ -15,11 +14,11 @@ export default function RootLayout({ children }) {
     <html >
       <body>
         <div style={{ display: 'flex' }}>
-          {/* <Sidebar /> */}
+          <Sidebar />
           <main
             style={{
               
-              padding: '0',
+              padding: '20px',
               flexGrow: 1,
               width: 'calc(100% - 250px)',
             }}
@@ -27,7 +26,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

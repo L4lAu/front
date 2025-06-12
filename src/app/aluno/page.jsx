@@ -7,35 +7,38 @@ import styles from './Home.module.css';
 const carrosselItems = [
   {
     id: 1,
-    imagem: '/pessoa1.jpg',
+    imagem: '@/../bannerMinaCarrossel.png',
     titulo: "Escola Tecnica Vanguarda"
   },
   {
     id: 2,
-    imagem: '@/../pessoa2.jpg'
+    imagem: '@/../bannerEstudando.png'
   },
   {
     id: 3,
-    imagem: '@/../pessoa3.jpg'
+    imagem: '@/../bannerIntervalo.png'
   }
 ];
 
 const avaliacoesItems = [
     {
     id: 1,
-    imagem: '@/../#.jfif'
+    imagem: '@/../1.jfif'
   },
   {
     id: 2,
-    imagem: '@/../#.jfif'
+    imagem: '@/../2.jfif'
   },
   {
     id: 3,
-    imagem: '@/../#.jfif'
+    imagem: '@/../3.jfif'
   }
 ];
 
+
+
 export default function Home({ mini }) {
+  
   // Estados do carrossel principal
   const [slideAtivo, setSlideAtivo] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
@@ -133,19 +136,15 @@ export default function Home({ mini }) {
 
       {/* Seções originais mantidas intactas */}
       <section className={styles.atalhos}>
-        <Link href="/Turmas" className={styles.atalho}>
+        <Link href="/aluno/Turmas" className={styles.atalho}>
           <div className={styles.atalhoIcone}>🏫</div>
           <div className={styles.atalhoTexto}>Turmas</div>
         </Link>
-        <Link href="/provas" className={styles.atalho}>
-          <div className={styles.atalhoIcone}>📝</div>
-          <div className={styles.atalhoTexto}>Provas</div>
+        <Link href="/aluno/Perfil" className={styles.atalho}>
+          <div className={styles.atalhoIcone}>👤</div>
+          <div className={styles.atalhoTexto}>Perfil</div>
         </Link>
-        <Link href="/relatorio" className={styles.atalho}>
-          <div className={styles.atalhoIcone}>📊</div>
-          <div className={styles.atalhoTexto}>Relatório</div>
-        </Link>
-        <Link href="/desempenho" className={`${styles.atalho} ${styles.atalhoFull}`}>
+        <Link href="/aluno/Desempenho" className={styles.atalho}>
           <div className={styles.atalhoIcone}>📈</div>
           <div className={styles.atalhoTexto}>Desempenho</div>
         </Link>
@@ -155,11 +154,11 @@ export default function Home({ mini }) {
         <div className={styles.atividades}>
           <h2>Atividades Recentes</h2>
           <ul>
-            <li>Projeto de Robótica - Entrega 15/06 <span className={styles.tempo}>há 1 hora atrás</span></li>
-            <li>Prova de Matemática - 18/06 <span className={styles.tempo}>há 3 horas atrás</span></li>
+            <li>Projeto de Robótica - Entrega 15/06 <span  className={styles.tempo}>há 1 hora atrás</span></li>
+            <li>Prova de Matemática - 18/06 <span href="/aluno/Materia/matematica" className={styles.tempo}>há 3 horas atrás</span></li>
             <li>Workshop de Programação - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
-            <li>Prova de Banco de dados - 18/06 <span className={styles.tempo}>há 3 horas atrás</span></li>
-            <li>Palestra de Racismo - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
+            <li>Prova de Matemática - 18/06 <span href="/aluno/Materia/matematica" className={styles.tempo}>há 3 horas atrás</span></li>
+            <li>Workshop de Programação - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
           </ul>
           <a href="#" className={styles.linkRodape}>Ver todas as atividades</a>
         </div>
@@ -170,8 +169,8 @@ export default function Home({ mini }) {
             <li>Reunião de Pais - 22/06 <span className={styles.tempo}>há 20 minutos atrás</span></li>
             <li>Feira de Ciências - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
             <li>Manutenção na Internet - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
-            <li>Visita Técnica para a GM - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
-            <li>Gincana Cultural - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
+            <li>Feira de Ciências - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
+            <li>Manutenção na Internet - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
           </ul>
           <a href="#" className={styles.linkRodape}>Ver todos os avisos</a>
         </div>

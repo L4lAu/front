@@ -38,12 +38,10 @@ const Footer = () => {
           <div className={styles.section}>
             <h3 className={styles.footerTitle}>Navegação</h3>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/">Turmas</a></li>
-              <li><a href="/">Provas</a></li>
-              <li><a href="/">Relatórios</a></li>
-              <li><a href="/">Desempenho</a></li>
-              <li><a href="/">Perfil</a></li>
+              <li><a href="/professor">Home</a></li>
+              <li><a href="/Provas">Provas</a></li>
+              <li><a href="/Relatorios">Relatórios</a></li>
+              <li><a href="/Perfil">Perfil</a></li>
             </ul>
           </div>
 

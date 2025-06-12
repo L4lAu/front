@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-// import Sidebar from '../components/header.js';
-// import Footer from '../components/footer/footer.js';
+import Sidebar from '../../components/header/Sidebar.js';
+import Footer from '../../components/footer/footer.js';
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export default function LayoutWrapper({ children }) {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* <Sidebar /> */}
+      <Sidebar />
       <main
         style={{
           padding: '20px',
@@ -28,7 +28,7 @@ export default function LayoutWrapper({ children }) {
       >
         {children}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

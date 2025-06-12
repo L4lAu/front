@@ -7,31 +7,31 @@ import styles from './Home.module.css';
 const carrosselItems = [
   {
     id: 1,
-    imagem: '/pessoa1.jpg',
+    imagem: '@/../bannerMinaCarrossel.png',
     titulo: "Escola Tecnica Vanguarda"
   },
   {
     id: 2,
-    imagem: '@/../pessoa2.jpg'
+    imagem: '@/../bannerEstudando.png'
   },
   {
     id: 3,
-    imagem: '@/../pessoa3.jpg'
+    imagem: '@/../bannerIntervalo.png'
   }
 ];
 
 const avaliacoesItems = [
     {
     id: 1,
-    imagem: '@/../#.jfif'
+    imagem: '@/../.jfif'
   },
   {
     id: 2,
-    imagem: '@/../#.jfif'
+    imagem: '@/../.jfif'
   },
   {
     id: 3,
-    imagem: '@/../#.jfif'
+    imagem: '@/../.jfif'
   }
 ];
 
@@ -145,10 +145,6 @@ export default function Home({ mini }) {
           <div className={styles.atalhoIcone}>📊</div>
           <div className={styles.atalhoTexto}>Relatório</div>
         </Link>
-        <Link href="/desempenho" className={`${styles.atalho} ${styles.atalhoFull}`}>
-          <div className={styles.atalhoIcone}>📈</div>
-          <div className={styles.atalhoTexto}>Desempenho</div>
-        </Link>
       </section>
 
       <section className={styles.secoes}>
@@ -158,8 +154,8 @@ export default function Home({ mini }) {
             <li>Projeto de Robótica - Entrega 15/06 <span className={styles.tempo}>há 1 hora atrás</span></li>
             <li>Prova de Matemática - 18/06 <span className={styles.tempo}>há 3 horas atrás</span></li>
             <li>Workshop de Programação - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
-            <li>Prova de Banco de dados - 18/06 <span className={styles.tempo}>há 3 horas atrás</span></li>
-            <li>Palestra de Racismo - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
+            <li>Prova de Matemática - 18/06 <span className={styles.tempo}>há 3 horas atrás</span></li>
+            <li>Workshop de Programação - 20/06 <span className={styles.tempo}>há 1 dia atrás</span></li>
           </ul>
           <a href="#" className={styles.linkRodape}>Ver todas as atividades</a>
         </div>
@@ -170,8 +166,8 @@ export default function Home({ mini }) {
             <li>Reunião de Pais - 22/06 <span className={styles.tempo}>há 20 minutos atrás</span></li>
             <li>Feira de Ciências - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
             <li>Manutenção na Internet - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
-            <li>Visita Técnica para a GM - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
-            <li>Gincana Cultural - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
+            <li>Feira de Ciências - 25/06 <span className={styles.tempo}>há 2 dias atrás</span></li>
+            <li>Manutenção na Internet - 28/06 <span className={styles.tempo}>há 4 dias atrás</span></li>
           </ul>
           <a href="#" className={styles.linkRodape}>Ver todos os avisos</a>
         </div>

@@ -3,9 +3,9 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(req) {
   try {
-    const { ra, senha } = await req.json();
+    const { login, senha } = await req.json();
 
-    const aluno = await read('alunos', 'raAluno = ?', [ra]);
+    const aluno = await read('alunos', 'raAluno = ?', [login]);
 
 
     if (!aluno) {
