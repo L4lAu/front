@@ -29,7 +29,7 @@ export default function Header() {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userType');
-    router.push('/login');
+    router.push('/');
   };
   return (
     <>
@@ -78,12 +78,6 @@ export default function Header() {
           )}
 
           <div className={styles.separador}></div>
-          
-
-          <a href="/aluno/Provas/responder/" className={styles.link}><ClipboardList size={20} /> {!(mini && !isMobile) && 'PROVAS'}</a>
-          <div className={styles.separador}></div>
-
-          <div className={styles.separador}></div>
 
           <a href="/aluno/Desempenho/20252025" className={styles.link}><BarChart2 size={20} /> {!(mini && !isMobile) && 'DESEMPENHO'}</a>
           <div className={styles.separador}></div>
@@ -102,8 +96,8 @@ export default function Header() {
           {!(mini && !isMobile) && (
           <div className={`${styles.dropup} ${dropupConfigAberto ? styles.dropupAberto : ''}`}>
               <a href="/" className={styles.subLink} onClick={handleLogout}>Sair</a>
-              <a href="/professor/sobre" className={styles.subLink}>Contato</a>
-              <a href="/professor/sobre" className={styles.subLink}>Sobre Nós</a>
+              <a href="/aluno/sobre" className={styles.subLink}>Contato</a>
+              <a href="/aluno/sobre" className={styles.subLink}>Sobre Nós</a>
             </div>
           )}
         </div>

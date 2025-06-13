@@ -5,18 +5,17 @@ import styles from './Home.module.css';
 
 // Dados do carrossel principal
 const carrosselItems = [
-  {
+    {
     id: 1,
-    imagem: '@/../bannerMinaCarrossel.png',
-    titulo: "Escola Tecnica Vanguarda"
+    imagem: '/aluno.png',
   },
   {
     id: 2,
-    imagem: '@/../bannerEstudando.png'
+    imagem: '/students.JPG'
   },
   {
     id: 3,
-    imagem: '@/../bannerIntervalo.png'
+    imagem: '/classroom.png'
   }
 ];
 
@@ -144,7 +143,7 @@ export default function Home({ mini }) {
           <div className={styles.atalhoIcone}>👤</div>
           <div className={styles.atalhoTexto}>Perfil</div>
         </Link>
-        <Link href="/aluno/Desempenho" className={styles.atalho}>
+        <Link href="/aluno/Desempenho/20252025" className={styles.atalho}>
           <div className={styles.atalhoIcone}>📈</div>
           <div className={styles.atalhoTexto}>Desempenho</div>
         </Link>
@@ -214,32 +213,6 @@ export default function Home({ mini }) {
               Mais de 85% dos alunos saem empregados ou com estágio garantido.
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Novo Carrossel de Avaliações (imagens) */}
-      <section className={styles.carrosselAvaliacoes}>
-        <h2 className={styles.tituloAvaliacoes}></h2>
-        <div className={styles.avaliacoesContainer}>
-          {avaliacoesItems.map((item, index) => (
-            <div 
-              key={item.id}
-              className={`${styles.bannerAvaliacao} ${index === slideAvaliacaoAtivo ? styles.ativo : ''}`}
-              style={{ backgroundImage: `url(${item.imagem})` }}
-            >
-              <div className={styles.overlayAvaliacao}></div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.indicadoresAvaliacoes}>
-          {avaliacoesItems.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicadorAvaliacao} ${index === slideAvaliacaoAtivo ? styles.ativo : ''}`}
-              onClick={() => irParaAvaliacao(index)}
-              aria-label={`Ir para avaliação ${index + 1}`}
-            />
-          ))}
         </div>
       </section>
     </main>

@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           <main
             style={{
               
-              padding: '20px',
+              padding: '0',
               flexGrow: 1,
               width: 'calc(100% - 250px)',
             }}
@@ -29,5 +29,5 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
-  );
+  )
 }

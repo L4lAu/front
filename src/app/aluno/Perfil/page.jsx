@@ -9,7 +9,7 @@ import {
 const EditableInfoItem = ({ icon, label, value, isEditing, onChange }) => {
   return (
     <div className="flex items-start space-x-4">
-      <div className="rounded-full bg-emerald-50/70 p-3 text-[#556b2f] shrink-0 border border-emerald-200">
+      <div className="rounded-full  p-3 text-[#556b2f] shrink-0 border border-[#556b2f]">
         {icon}
       </div>
       <div className="w-full">
@@ -38,8 +38,8 @@ const PerfilPageFinal = () => {
   const [isEditing, setIsEditing] = useState(false);
   
   const [profileData, setProfileData] = useState({
-    bio: 'Professor Convidado pela instituição para ministrar algumas aulas técnicas e de nível médio. Qualquer dúvida consultar a secretaria.',
-    email: 'Convidado.Professor@email.com',
+    bio: 'Aluno Convidado para utilização do site muito legal que fizemos Qualquer dúvida consultar a secretaria.',
+    email: 'Convidado.aluno@email.com',
     telefone: '(00) 00000-0000',
     rua: 'Rua das Oportunidades, 123',
     cidade: 'Av Paulista SP, BR'
@@ -57,7 +57,7 @@ const PerfilPageFinal = () => {
       
       {/* CARD DO PERFIL - Classes de responsividade adicionadas */}
       <div 
-        className="w-full max-w-3xl mx-auto bg-[#f4deb5] rounded-2xl p-6 md:p-8 transition-all duration-300
+        className="w-full max-w-3xl mx-auto bg-[#fff6e0] rounded-2xl p-6 md:p-8 transition-all duration-300
                    shadow-[0_7px_0px_1.1px] shadow-[#556b2f]" // Padding menor em telas pequenas
       >
         
@@ -70,7 +70,7 @@ const PerfilPageFinal = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-8">
           <div className="relative flex-shrink-0">
              {/* Tamanho do Avatar ajustado para telas menores */}
-            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
+            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-gray-200 flex items-center justify-center border-2 border-[#556b2f]">
               <User className="w-16 h-16 md:w-20 md:h-20 text-gray-400" />
             </div>
             <span className="absolute bottom-1 right-0 md:bottom-2 md:right-1 bg-green-500 w-5 h-5 rounded-full border-4 border-[#f4deb5]" title="Online"></span>
@@ -82,7 +82,7 @@ const PerfilPageFinal = () => {
               <textarea
                 value={profileData.bio}
                 onChange={(e) => handleInputChange('bio', e.target.value)}
-                className="w-full p-2 text-black border border-gray-400 rounded-md focus:ring-2 focus:ring-[#556b2f] transition-shadow duration-200 bg-white/50 text-base"
+                className="w-full p-2 text-black border border-[#c28762] rounded-md focus:ring-2 focus:ring-[#556b2f] transition-shadow duration-200 bg-white/50 text-base"
                 rows="5"
               />
             ) : (
@@ -91,23 +91,23 @@ const PerfilPageFinal = () => {
           </div>
         </div>
 
-        <hr className="my-6 md:my-8 border-gray-300/70" />
+        <hr className="my-6 md:my-8 border-[#c28766]" />
 
         {/* Grid com espaçamento ajustado */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-x-8 md:gap-y-6">
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-[#556b2f]">Educação</h3>
             <div className="flex items-start space-x-4">
-                <div className="rounded-full bg-emerald-50/70 p-3 text-[#556b2f] border border-emerald-200"><GraduationCap size={24} /></div>
+                <div className="rounded-full  p-3 text-[#556b2f] border border-[#556b2f]"><GraduationCap size={24} /></div>
                 <div>
                     <p className="text-sm font-semibold text-[#556b2f]">Formação Principal</p>
-                    <p className="text-lg text-black">Engenheiro de Controle e Automação</p>
+                    <p className="text-lg text-black">Estudante Técnico de Dev</p>
                 </div>
             </div>
             <div className="flex items-start space-x-4">
-                <div className="rounded-full bg-emerald-50/70 p-3 text-[#556b2f] border border-emerald-200"><Wrench size={24} /></div>
+                <div className="rounded-full  p-3 text-[#556b2f] border border-[#556b2f]"><Wrench size={24} /></div>
                 <div>
-                    <p className="text-sm font-semibold text-[#556b2f]">Cursos Ministrados</p>
+                    <p className="text-sm font-semibold text-[#556b2f]">Cursando</p>
                     <ul className="text-lg text-black list-disc list-inside">
                         <li>Desenvolvimento de Sistemas</li>
                         <li>Automação Industrial</li>
@@ -116,7 +116,7 @@ const PerfilPageFinal = () => {
             </div>
           </div>
           <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-[#556b2f]">Contato & Endereço</h3>
+            <h3 className="text-lg md:text-xl font-bold text-[#556b2f] border-[#556b2f]">Contato & Endereço</h3>
             <EditableInfoItem icon={<Mail size={24} />} label="Email" value={profileData.email} isEditing={isEditing} onChange={(e) => handleInputChange('email', e.target.value)} />
             <EditableInfoItem icon={<Phone size={24} />} label="Telefone" value={profileData.telefone} isEditing={isEditing} onChange={(e) => handleInputChange('telefone', e.target.value)} />
             <EditableInfoItem icon={<MapPin size={24} />} label="Rua" value={profileData.rua} isEditing={isEditing} onChange={(e) => handleInputChange('rua', e.target.value)} />
@@ -125,8 +125,8 @@ const PerfilPageFinal = () => {
         </div>
 
         {/* Seção de botões com melhor empilhamento em mobile */}
-        <div className="mt-10 pt-6 border-t border-gray-300/70 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-          <Link href="/professores" className="flex items-center justify-center gap-2 text-gray-600 font-semibold hover:text-[#556b2f] transition-colors w-full sm:w-auto">
+        <div className="mt-10 pt-6 border-t border-[#c28762] flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+          <Link href="/professores" className="flex items-center justify-center gap-2 text-[#556b2f] font-semibold hover:text-[#556b2f] transition-colors w-full sm:w-auto">
             <LogOut className="w-5 h-5" />
             <span>Sair</span>
           </Link>
@@ -139,7 +139,7 @@ const PerfilPageFinal = () => {
                 </button>
               </>
             ) : (
-              <button onClick={handleEditClick} className="flex items-center justify-center gap-2 bg-gray-200 text-black font-bold py-2 px-6 rounded-lg transition-colors hover:bg-gray-300 w-full sm:w-auto">
+              <button onClick={handleEditClick} className="flex items-center justify-center gap-2 bg-[#556b2f] text-white font-bold py-2 px-6 rounded-lg transition-colors hover:bg-gray-300 w-full sm:w-auto">
                 <Pencil className="w-4 h-4" /> Editar Perfil
               </button>
             )}

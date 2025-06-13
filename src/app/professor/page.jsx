@@ -5,33 +5,24 @@ import styles from './Home.module.css';
 
 // Dados do carrossel principal
 const carrosselItems = [
-  {
+   {
     id: 1,
-    imagem: '@/../bannerMinaCarrossel.png',
-    titulo: "Escola Tecnica Vanguarda"
+    imagem: '/aluno.png',
   },
   {
     id: 2,
-    imagem: '@/../bannerEstudando.png'
+    imagem: '/students.JPG'
   },
   {
     id: 3,
-    imagem: '@/../bannerIntervalo.png'
+    imagem: '/classroom.png'
   }
 ];
 
 const avaliacoesItems = [
     {
     id: 1,
-    imagem: '@/../.jfif'
-  },
-  {
-    id: 2,
-    imagem: '@/../.jfif'
-  },
-  {
-    id: 3,
-    imagem: '@/../.jfif'
+    imagem: '/logoBanner.jpeg',
   }
 ];
 
@@ -133,15 +124,15 @@ export default function Home({ mini }) {
 
       {/* Seções originais mantidas intactas */}
       <section className={styles.atalhos}>
-        <Link href="/Turmas" className={styles.atalho}>
+        <Link href="/professor/Turmas" className={styles.atalho}>
           <div className={styles.atalhoIcone}>🏫</div>
           <div className={styles.atalhoTexto}>Turmas</div>
         </Link>
-        <Link href="/provas" className={styles.atalho}>
+        <Link href="/professor/Provas" className={styles.atalho}>
           <div className={styles.atalhoIcone}>📝</div>
           <div className={styles.atalhoTexto}>Provas</div>
         </Link>
-        <Link href="/relatorio" className={styles.atalho}>
+        <Link href="/professor/Relatorios" className={styles.atalho}>
           <div className={styles.atalhoIcone}>📊</div>
           <div className={styles.atalhoTexto}>Relatório</div>
         </Link>
@@ -214,31 +205,6 @@ export default function Home({ mini }) {
         </div>
       </section>
 
-      {/* Novo Carrossel de Avaliações (imagens) */}
-      <section className={styles.carrosselAvaliacoes}>
-        <h2 className={styles.tituloAvaliacoes}></h2>
-        <div className={styles.avaliacoesContainer}>
-          {avaliacoesItems.map((item, index) => (
-            <div 
-              key={item.id}
-              className={`${styles.bannerAvaliacao} ${index === slideAvaliacaoAtivo ? styles.ativo : ''}`}
-              style={{ backgroundImage: `url(${item.imagem})` }}
-            >
-              <div className={styles.overlayAvaliacao}></div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.indicadoresAvaliacoes}>
-          {avaliacoesItems.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicadorAvaliacao} ${index === slideAvaliacaoAtivo ? styles.ativo : ''}`}
-              onClick={() => irParaAvaliacao(index)}
-              aria-label={`Ir para avaliação ${index + 1}`}
-            />
-          ))}
-        </div>
-      </section>
     </main>
   );
 }

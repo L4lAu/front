@@ -126,7 +126,7 @@ const PerfilPageFinal = () => {
 
         {/* Seção de botões com melhor empilhamento em mobile */}
         <div className="mt-10 pt-6 border-t border-[#c28762] flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-          <Link href="/professores" className="flex items-center justify-center gap-2 text-[#556b2f] font-semibold hover:text-[#556b2f] transition-colors w-full sm:w-auto">
+          <Link href="/" className="flex items-center justify-center gap-2 text-[#556b2f] font-semibold hover:text-[#556b2f] transition-colors w-full sm:w-auto">
             <LogOut className="w-5 h-5" />
             <span>Sair</span>
           </Link>
